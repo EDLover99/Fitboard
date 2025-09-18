@@ -69,6 +69,7 @@ function mostrarRutinas() {
         const card = document.createElement('div');
         card.className = 'card mb-3';
 
+        // Card principal de la rutina
         card.innerHTML = `
             <div class="card-body">
                 <h5 class="card-title">${rutina.nombre}</h5>
@@ -76,44 +77,49 @@ function mostrarRutinas() {
                 <div class="card-buttons">
                     <button class="btn btn-sm btn-outline-success" onclick="agregarEjercicioRutinaPrompt(${rIndex})">+ Añadir ejercicio</button>
                     <button class="btn btn-sm btn-danger" onclick="borrarRutinaDia('${diaSeleccionado}', ${rIndex}); mostrarRutinas()">Borrar rutina</button>
-                    <button class="btn btn-sm btn-warning" onclick="copiarRutinaPortapapeles(JSON.parse(localStorage.getItem('rutinas'))['${diaSeleccionado}'][${rIndex}])">Copiar Rutina</button>
-                    <button class="btn btn-sm btn-info" onclick="marcarRutinaCompleta(${rIndex})">Rutina Completada</button>
+                    <button class="btn btn-sm btn-warning" onclick="copiarRutinaPortapapeles(JSON.parse(localStorage.getItem('rutinas'))['${diaSeleccionado}'][${rIndex}])">Copiar</button>
+                    <button class="btn btn-sm btn-info" onclick="marcarRutinaCompleta(${rIndex})">Marcar como completa</button>
                 </div>
             </div>
         `;
 
         rutinasContainer.appendChild(card);
 
+        // Contenedor de ejercicios
         const ejerciciosContainer = document.getElementById(`ejercicios-${rIndex}`);
         rutina.ejercicios.forEach((ejercicio, eIndex) => {
             const ejDiv = document.createElement('div');
             ejDiv.className = 'border rounded p-2 mb-2 series-container';
 
+            // Series
             let seriesHTML = "";
             ejercicio.series.forEach((serie, sIndex) => {
-        seriesHTML += `
-            <div class="serie-item">
-                <span>Serie ${sIndex+1}:</span>
-                <input type="number" class="form-control form-control-sm" 
-                value="${serie.peso || ''}" 
-                placeholder="kg"
-                onchange="editarSerieRutina('${diaSeleccionado}', ${rIndex}, ${eIndex}, ${sIndex}, 'peso', this.value)"> 
+                seriesHTML += `
+                    <div class="serie-item">
+                        <span>Serie ${sIndex + 1}:</span>
+                        <input type="number" class="form-control form-control-sm" value="${serie.peso || ''}" placeholder="kg"
+                            onchange="editarSerieRutina('${diaSeleccionado}', ${rIndex}, ${eIndex}, ${sIndex}, 'peso', this.value)"> kg
+                        <input type="number" class="form-control form-control-sm" value="${serie.reps || ''}" placeholder="reps"
+                            onchange="editarSerieRutina('${diaSeleccionado}', ${rIndex}, ${eIndex}, ${sIndex}, 'reps', this.value)"> reps
+                        <button class="btn btn-sm btn-danger" onclick="borrarSerieRutina('${diaSeleccionado}', ${rIndex}, ${eIndex}, ${sIndex}); mostrarRutinas()">X</button>
+                    </div>
+                `;
+            });
 
-                <input type="number" class="form-control form-control-sm" 
-                value="${serie.reps || ''}" 
-                placeholder="reps"
-                onchange="editarSerieRutina('${diaSeleccionado}', ${rIndex}, ${eIndex}, ${sIndex}, 'reps', this.value)">
+            // Ejercicio con botón para borrar ejercicio completo
+            ejDiv.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h6>${ejercicio.nombre}</h6>
+                    <button class="btn btn-sm btn-danger" onclick="borrarEjercicioRutina('${diaSeleccionado}', ${rIndex}, ${eIndex}); mostrarRutinas()">Borrar ejercicio</button>
+                </div>
+                ${seriesHTML}
+            `;
 
-                <button class="btn btn-sm btn-danger" onclick="borrarSerieRutina('${diaSeleccionado}', ${rIndex}, ${eIndex}, ${sIndex}); mostrarRutinas()">X</button>
-            </div>
-        `;
-});
-
-            ejDiv.innerHTML = `<h6>${ejercicio.nombre}</h6>${seriesHTML}`;
             ejerciciosContainer.appendChild(ejDiv);
         });
     });
 }
+
 
 
 // Función para prompt de añadir ejercicio
