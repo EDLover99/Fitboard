@@ -94,8 +94,16 @@ function mostrarRutinas() {
         seriesHTML += `
             <div class="serie-item">
                 <span>Serie ${sIndex+1}:</span>
-                <input type="number" value="${serie.peso}" onchange="editarSerieRutina('${diaSeleccionado}', ${rIndex}, ${eIndex}, ${sIndex}, 'peso', this.value)"> kg
-                <input type="number" value="${serie.reps}" onchange="editarSerieRutina('${diaSeleccionado}', ${rIndex}, ${eIndex}, ${sIndex}, 'reps', this.value)"> reps
+                <input type="number" class="form-control form-control-sm" 
+                value="${serie.peso || ''}" 
+                placeholder="kg"
+                onchange="editarSerieRutina('${diaSeleccionado}', ${rIndex}, ${eIndex}, ${sIndex}, 'peso', this.value)"> 
+
+                <input type="number" class="form-control form-control-sm" 
+                value="${serie.reps || ''}" 
+                placeholder="reps"
+                onchange="editarSerieRutina('${diaSeleccionado}', ${rIndex}, ${eIndex}, ${sIndex}, 'reps', this.value)">
+
                 <button class="btn btn-sm btn-danger" onclick="borrarSerieRutina('${diaSeleccionado}', ${rIndex}, ${eIndex}, ${sIndex}); mostrarRutinas()">X</button>
             </div>
         `;
