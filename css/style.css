@@ -1,0 +1,149 @@
+/* ------------------------- */
+/* Estilos generales */
+/* ------------------------- */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #0d6efd;
+}
+
+/* ------------------------- */
+/* Cards y contenedores */
+/* ------------------------- */
+.card {
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 1rem;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+/* Scroll en contenedores largos */
+#rutinasContainer, #historialContainer {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* ------------------------- */
+/* Días y botones generales */
+/* ------------------------- */
+.dia-btn {
+    min-width: 90px;
+    margin-bottom: 5px;
+}
+
+.card-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+/* Hover en botones */
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* ------------------------- */
+/* Series y ejercicios */
+/* ------------------------- */
+.series-container {
+    display: flex;
+    flex-direction: column; /* cada ejercicio en columna */
+    gap: 5px;
+}
+
+.serie-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.serie-item span {
+    min-width: 25px; /* alinea etiquetas "Serie" */
+}
+
+.serie-item input[type="number"] {
+    width: 60px; /* inputs compactos */
+    text-align: center;
+}
+
+.serie-item button {
+    margin-left: auto; /* la X siempre al final */
+}
+
+/* ------------------------- */
+/* SweetAlert2 inputs */
+/* ------------------------- */
+.swal2-input {
+    width: 80%;
+    margin: 5px auto;
+    font-size: 1.1rem;
+    display: block;
+    text-align: center;
+}
+
+/* ------------------------- */
+/* Collapse iconos */
+/* ------------------------- */
+.collapse-toggle {
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+.collapse.show .collapse-toggle {
+    transform: rotate(180deg);
+}
+
+/* ------------------------- */
+/* Historial */
+/* ------------------------- */
+#historialContainer {
+    display: none; /* oculto por defecto */
+}
+
+/* ------------------------- */
+/* Media queries para móvil */
+/* ------------------------- */
+@media (max-width: 576px) {
+    .series-container input[type="number"] {
+        width: 70px;
+        font-size: 1.2rem;
+    }
+    .card-buttons {
+        justify-content: center;
+        gap: 8px;
+    }
+    .swal2-input {
+        width: 90%;
+        font-size: 1.3rem;
+    }
+    .dia-btn {
+        min-width: 70px;
+    }
+}
+
+.serie-item button {
+    margin-left: auto; /* sigue al final */
+    min-width: 40px;   /* un poco más ancho */
+    padding: 0.25rem 0.5rem; /* mantiene compacto pero cómodo */
+}
+
+.card-buttons .btn-info {
+    min-width: 100px;       /* ajusta según el texto */
+    white-space: nowrap;    /* evita que el texto se divida */
+    padding: 0.4rem 0.8rem; /* cómodo y visible */
+}
